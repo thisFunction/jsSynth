@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>synth.js</title>
+    <link rel="stylesheet" href="styles/index.css">
+    <script type="text/javascript" src="scripts/synth.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:100,400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section class="synth-controls">
+        <div>
+            <h1><span>JS</span> SYNTH </h1>
+            <span class="made-by">- thisFunction -</span>
+        </div>
+        <div class="power">
+            <p>Power</p>
+            <button class="stop active">Off</button>
+            <button class="start">On</button>
+
+        </div>      
+        <div class="waveform">
+            <p>VCO Wave</p>
+            <button value="sine" class="change-waveform active">Change</button>
+            <p class="display">sine</p>
+        </div>
+        <div>
+            <p>Volume</p>
+            <input class="volume" value="1" step="0.05" type="range" min="0" max="1"> 
+        </div>
+    </section>
+
+    <canvas id="oscilloscope"></canvas>
+
+    <section class="keys">
+        <button value="1" class="key">C</button>
+        <button value="2" class="key black">#</button>
+        <button value="3" class="key">D</button>
+        <button value="4" class="key black">#</button>
+        <button value="5" class="key">E</button>
+        <button value="6" class="key">F</button>
+        <button value="7" class="key black">#</button>
+        <button value="8" class="key">G</button>
+        <button value="9" class="key black">#</button>
+        <button value="10" class="key">A</button>
+        <button value="11" class="key black">#</button>
+        <button value="12" class="key">B</button>
+        <button value="13" class="key">C</button>
+    </section>
+
+    <section class="octaves">
+        
+    </section>
+</body>
+</html>
