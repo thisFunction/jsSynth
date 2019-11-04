@@ -188,5 +188,24 @@ p {
 
   .black {
     background: #ffdcc6;
+    color: cornsilk;
+  }
+
+  .octaves {
+    margin-top: 30px;
+  }
+
+  .octaves button {
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    color: cornsilk;
+  }
+
+  .octaves button.active {
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    color: #ff928a;
   }
 

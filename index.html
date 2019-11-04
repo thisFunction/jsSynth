@@ -9,8 +9,7 @@
     <script type="text/javascript" src="scripts/synth.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:100,400,700&display=swap" rel="stylesheet">
 </head>
-<body>
-
+<body>    
     <section class="synth-controls">
         <div>
             <h1><span>JS</span> SYNTH </h1>
@@ -20,7 +19,6 @@
             <p>Power</p>
             <button class="stop active">Off</button>
             <button class="start">On</button>
-
         </div>      
         <div class="waveform">
             <p>VCO Wave</p>
@@ -33,7 +31,13 @@
         </div>
     </section>
 
-    <canvas id="oscilloscope"></canvas>
+    <section class="effects">
+        <div class="power">
+        
+        </div>
+    </section>
+
+    <canvas height="150" id="oscilloscope"></canvas>
 
     <section class="keys">
         <button value="1" class="key">C</button>
@@ -52,7 +56,16 @@
     </section>
 
     <section class="octaves">
-        
+        <span>Octave </span>
+        <button value="16.35">0</button>
+        <button value="32.70">1</button>
+        <button value="65.41">2</button>
+        <button value="130.81">3</button>
+        <button class="active" value="261.63">4</button>
+        <button value="523.25">5</button>
+        <button value="1046.50">6</button>
+        <button value="2349.32">7</button>
+        <button value="4186.01">8</button>
     </section>
 </body>
 </html>
