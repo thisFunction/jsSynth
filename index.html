@@ -9,7 +9,7 @@
     <script type="text/javascript" src="scripts/synth.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:100,400,700&display=swap" rel="stylesheet">
 </head>
-<body>    
+<body>
     <section class="synth-controls">
         <div>
             <h1><span>JS</span> SYNTH </h1>
@@ -19,7 +19,7 @@
             <p>Power</p>
             <button class="stop active">Off</button>
             <button class="start">On</button>
-        </div>      
+        </div>
         <div class="waveform">
             <p>VCO Wave</p>
             <button value="sine" class="change-waveform active">Change</button>
@@ -27,13 +27,18 @@
         </div>
         <div>
             <p>Volume</p>
-            <input class="volume" value="1" step="0.05" type="range" min="0" max="1"> 
+            <input class="volume" value="1" step="0.05" type="range" min="0" max="1">
         </div>
     </section>
 
-    <section class="effects">
-        <div class="power">
-        
+    <!-- // https://www.oreilly.com/library/view/web-audio-api/9781449332679/ch06.html -->
+    <section class="filters">
+        <div>
+            <p>Low Pass Filter</p>
+            <span>Frequency</span>
+            <input class="lpf-frequency" value="440" step="1" type="range" min="20" max="20000">
+            <span>Quality</span>
+            <input class="lpf-q" value="2" step="1" type="range" min="2" max="100">
         </div>
     </section>
 
@@ -68,4 +73,5 @@
         <button value="4186.01">8</button>
     </section>
 </body>
+
 </html>

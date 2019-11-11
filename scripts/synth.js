@@ -6,6 +6,7 @@ let oscillator;
 let analyser;
 let gainNode;
 let octave = 261.63;
+let lowpass;
 
 window.onload = function() {
     setupCanvas();
@@ -36,8 +37,16 @@ window.onload = function() {
     
         analyser = context.createAnalyser();
         
-        gainNode.connect(analyser)
-        analyser.connect(context.destination);
+        gainNode.connect(analyser);
+
+        lowpass = new BiquadFilterNode(context);
+        lowpass.type = 'lowpass';
+        lowpass.Q.value = 0;
+        lowpass.frequency.value = 440;
+
+        gainNode.connect(lowpass);
+
+        lowpass.connect(context.destination);
 
         oscillator.start();
         draw();
@@ -117,6 +126,20 @@ window.onload = function() {
             }
         }
     }
+
+    document.querySelector('.lpf-frequency').addEventListener('input', function() {
+        if (lowpass !== undefined && document.querySelector('.start').classList.contains('active')) {
+            const value = Number(this.value);
+            lowpass.frequency.setValueAtTime(value, context.currentTime);
+        }
+    });
+
+    document.querySelector('.lpf-q').addEventListener('input', function() {
+        if (lowpass !== undefined && document.querySelector('.start').classList.contains('active')) {
+            const value = Number(this.value);
+            lowpass.Q.setValueAtTime(value, context.currentTime);
+        }
+    });
 
     var octaves = document.querySelectorAll('.octaves button');
 

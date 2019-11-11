@@ -32,10 +32,12 @@ h1 span {
 }
 
 .synth-controls {
-    border-top: 2px solid #ff6969;
-    display: flex;
-    padding: 95px 10px 20px;
-    justify-content: space-around;
+  border-bottom: 1px solid #ff6969;
+  border-top: 2px solid #ff6969;
+  display: flex;
+  padding: 50px 10px 20px;
+  justify-content: space-around;
+  margin-bottom: 3em;
 }
 
 .waveform {
@@ -75,7 +77,7 @@ p {
     font-weight: 400;
 }
 
-.volume {
+[type="range"] {
     -webkit-appearance: none;
     vertical-align: middle;
     outline: none;
@@ -84,40 +86,40 @@ p {
     background: none;
   }
   
-  .volume::-webkit-slider-runnable-track {
+  [type="range"]::-webkit-slider-runnable-track {
     background-color: #ffdcc6;
     height: 6px;
     border-radius: 3px;
     border: 1px solid transparent;
   }
   
-  .volume::-moz-range-track {
+  [type="range"]::-moz-range-track {
     background-color: #ffdcc6;
     height: 6px;
     border-radius: 3px;
     border: none;
   }
   
-  .volume::-ms-track {
+  [type="range"]::-ms-track {
     color: transparent;
     border: none;
     background: none;
     height: 6px;
   }
   
-  .volume::-ms-fill-lower { 
+  [type="range"]::-ms-fill-lower { 
     background-color: #ffdcc6;
     border-radius: 3px;
   }
   
-  .volume::-ms-fill-upper { 
+  [type="range"]::-ms-fill-upper { 
     background-color: #ffdcc6;
     border-radius: 3px;
   }
   
-  .volume::-ms-tooltip { display: none; /* display and visibility only */ }
+  [type="range"]::-ms-tooltip { display: none; /* display and visibility only */ }
   
-  .volume::-moz-range-thumb {
+  [type="range"]::-moz-range-thumb {
     border-radius: 20px;
     height: 18px;
     width: 18px;
@@ -126,11 +128,11 @@ p {
     background-color: #ff928a;
   }
   
-  .volume:active::-moz-range-thumb {
+  [type="range"]:active::-moz-range-thumb {
     outline: none;
   }
   
-  .volume::-webkit-slider-thumb {
+  [type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none !important;
     border-radius: 100%;
     background-color: #ff928a;
@@ -139,16 +141,16 @@ p {
     margin-top: -7px;
   }
   
-  .volume[disabled]::-webkit-slider-thumb {
+  [type="range"][disabled]::-webkit-slider-thumb {
     background-color: transparent;
     border: 1px solid #ffdcc6;
   }
   
-  .volume:active::-webkit-slider-thumb {
+  [type="range"]:active::-webkit-slider-thumb {
     outline: none;
   }
   
-  .volume::-ms-thumb { 
+  [type="range"]::-ms-thumb { 
     border-radius: 100%;
     background-color: #ff928a;
     height: 18px;
@@ -156,8 +158,14 @@ p {
     border: none;
   }
   
-  .volume:active::-ms-thumb {
+  [type="range"]:active::-ms-thumb {
     border: none;
+  }
+
+  .filters {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-around;
   }
   
   output {
