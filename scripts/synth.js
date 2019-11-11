@@ -10,6 +10,7 @@ let lowpass;
 
 window.onload = function() {
     setupCanvas();
+
     document.querySelector('.start').addEventListener('click', function() {
         if (!this.classList.contains('active')) {
             createNoise();
@@ -37,8 +38,6 @@ window.onload = function() {
     
         analyser = context.createAnalyser();
         
-        gainNode.connect(analyser);
-
         lowpass = new BiquadFilterNode(context);
         lowpass.type = 'lowpass';
         lowpass.Q.value = 0;
@@ -46,7 +45,13 @@ window.onload = function() {
 
         gainNode.connect(lowpass);
 
-        lowpass.connect(context.destination);
+        let compressor = new DynamicsCompressorNode(context)
+
+        lowpass.connect(compressor);
+        compressor.connect(context.destination);
+        
+        compressor.connect(analyser);
+
 
         oscillator.start();
         draw();
