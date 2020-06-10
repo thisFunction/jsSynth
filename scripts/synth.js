@@ -1,19 +1,28 @@
 
 
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-let context; 
-let oscillator; 
-let analyser;
-let gainNode;
-let octave = 261.63;
-let lowpass;
+
+
 
 window.onload = function() {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let oscillator; 
+    let gainNode;
+    let octave = 261.63;
+    let lowpass;
+    let volume = 1;
+    let attackValue = .3;
+    let decayValue = .3;
+    let sustainValue = .3;
+    let releaseValue = .3;
+
+    let context = new AudioContext();
+    let compressor = new DynamicsCompressorNode(context)
+    let analyser = context.createAnalyser();
+
     setupCanvas();
 
     document.querySelector('.start').addEventListener('click', function() {
         if (!this.classList.contains('active')) {
-            createNoise();
             document.querySelector('.stop').classList.remove('active');
             this.classList.add('active');
         }
@@ -22,38 +31,23 @@ window.onload = function() {
     document.querySelector('.stop').addEventListener('click', function() {
         document.querySelector('.start').classList.remove('active');
         this.classList.add('active');
-        gainNode.gain.setValueAtTime(0, context.currentTime)
     });
 
     function createNoise() {
-        context = new AudioContext();
         oscillator = context.createOscillator();
         oscillator.type = document.querySelector('.change-waveform').value;
         oscillator.frequency.value = octave;
 
         gainNode = context.createGain();
-        gainNode.gain.value = document.querySelector('.volume').value;
-       
+        gainNode.gain.value = 0;
+
         oscillator.connect(gainNode);
-    
-        analyser = context.createAnalyser();
-        
-        lowpass = new BiquadFilterNode(context);
-        lowpass.type = 'lowpass';
-        lowpass.Q.value = 0;
-        lowpass.frequency.value = 440;
 
-        gainNode.connect(lowpass);
+        gainNode.connect(compressor);
 
-        let compressor = new DynamicsCompressorNode(context)
-
-        lowpass.connect(compressor);
         compressor.connect(context.destination);
-        
-        compressor.connect(analyser);
-
-
         oscillator.start();
+        compressor.connect(analyser);
         draw();
     }
 
@@ -94,8 +88,7 @@ window.onload = function() {
 
     document.querySelector('.volume').addEventListener('input', function() {
         if (gainNode !== undefined && document.querySelector('.start').classList.contains('active')) {
-            const value = Number(this.value);
-            gainNode.gain.setValueAtTime(value, context.currentTime);
+            volume = Number(this.value);
         }
     });
 
@@ -116,35 +109,58 @@ window.onload = function() {
         }
     });
 
+    document.querySelector('.eg-attack').addEventListener('input', function() {
+        debugger
+        if (document.querySelector('.start').classList.contains('active')) {
+            attackValue = Number(this.value);
+        }
+    });
+
+    document.querySelector('.eg-decay').addEventListener('input', function() {
+        if (document.querySelector('.start').classList.contains('active')) {
+            decayValue = attackValue + Number(this.value);
+        }
+    });
+
+    document.querySelector('.eg-sustain').addEventListener('input', function() {
+        if (document.querySelector('.start').classList.contains('active')) {
+            sustainValue = decayValue + Number(this.value);
+        }
+    });
+
+    document.querySelector('.eg-release').addEventListener('input', function() {
+        if (document.querySelector('.start').classList.contains('active')) {
+            releaseValue = sustainValue + Number(this.value);
+        }
+    });
+
     var keys = document.querySelectorAll('.key');
    
     for(var i = 0, max = keys.length; i < max; i++) {
         keys[i].onclick = function() {
             if (document.querySelector('.start').classList.contains('active')) {
+                createNoise();
                 oscillator.frequency.value = octave * Math.pow(2, this.value/12);
+                gainNode.gain.setValueAtTime(0, 0);
+                gainNode.gain.linearRampToValueAtTime(volume, context.currentTime + attackValue);
+                gainNode.gain.linearRampToValueAtTime(volume / 3, context.currentTime + decayValue);
+                gainNode.gain.setValueAtTime(volume / 3, context.currentTime + sustainValue);
+                gainNode.gain.linearRampToValueAtTime(0, context.currentTime + releaseValue);
             }
         }
 
         keys[i].onmouseover = function(e) {
             if (e.buttons === 1 && document.querySelector('.start').classList.contains('active')){
+                createNoise();
                 oscillator.frequency.value = octave * Math.pow(2, this.value/12);
+                gainNode.gain.setValueAtTime(0, 0);
+                gainNode.gain.linearRampToValueAtTime(volume, context.currentTime + attackValue);
+                gainNode.gain.linearRampToValueAtTime(volume / 3, context.currentTime + decayValue);
+                gainNode.gain.setValueAtTime(volume / 3, context.currentTime + sustainValue);
+                gainNode.gain.linearRampToValueAtTime(0, context.currentTime + releaseValue);
             }
         }
     }
-
-    document.querySelector('.lpf-frequency').addEventListener('input', function() {
-        if (lowpass !== undefined && document.querySelector('.start').classList.contains('active')) {
-            const value = Number(this.value);
-            lowpass.frequency.setValueAtTime(value, context.currentTime);
-        }
-    });
-
-    document.querySelector('.lpf-q').addEventListener('input', function() {
-        if (lowpass !== undefined && document.querySelector('.start').classList.contains('active')) {
-            const value = Number(this.value);
-            lowpass.Q.setValueAtTime(value, context.currentTime);
-        }
-    });
 
     var octaves = document.querySelectorAll('.octaves button');
 

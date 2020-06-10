@@ -3,7 +3,7 @@ html {
     background: cornsilk;
     display: flex;
     align-items: center;
-    height: 100%;
+    padding: 3em;
 }
 
 body {

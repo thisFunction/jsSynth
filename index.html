@@ -27,22 +27,27 @@
         </div>
         <div>
             <p>Volume</p>
-            <input class="volume" value="1" step="0.05" type="range" min="0" max="1">
+            <input class="volume" value="1" step="0.1" type="range" min="0" max="1">
         </div>
     </section>
 
-    <!-- // https://www.oreilly.com/library/view/web-audio-api/9781449332679/ch06.html -->
     <section class="filters">
-        <p>Low Pass Filter</p>
-
+        <p>Envelope Generator</p>
         <div>
-            <span>Frequency</span>
-            <input class="lpf-frequency" value="440" step="1" type="range" min="20" max="20000">
+            <span>Attack</span>
+            <input class="eg-attack" value=".3" step=".04" type="range" min=".1" max=".5">
         </div>
-        
         <div>
-            <span>Quality</span>
-            <input class="lpf-q" value="2" step="1" type="range" min="2" max="100">
+            <span>Decay</span>
+            <input class="eg-decay" value=".1" step=".04" type="range" min=".1" max=".5">
+        </div>
+        <div>         
+            <span>Sustain</span>
+            <input class="eg-sustain" value=".2" step=".04" type="range" min=".1" max=".5">
+        </div>
+        <div>        
+            <span>Release</span>
+            <input class="eg-release" value=".2" step=".04" type="range" min=".1" max=".5">
         </div>
     </section>
 
