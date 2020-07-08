@@ -38,7 +38,7 @@ window.onload = function() {
     
         analyser = context.createAnalyser();
         
-        lowpass = new BiquadFilterNode(context);
+        lowpass = context.createBiquadFilter();
         lowpass.type = 'lowpass';
         lowpass.Q.value = 0;
         lowpass.frequency.value = 440;
