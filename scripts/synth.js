@@ -23,6 +23,7 @@ window.onload = function() {
         document.querySelector('.start').classList.remove('active');
         this.classList.add('active');
         gainNode.gain.setValueAtTime(0, context.currentTime)
+        context.close();
     });
 
     function createNoise() {
