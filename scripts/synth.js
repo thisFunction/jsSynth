@@ -45,7 +45,7 @@ window.onload = function() {
 
         gainNode.connect(lowpass);
 
-        let compressor = new DynamicsCompressorNode(context)
+        let compressor = context.createDynamicsCompressor()
 
         lowpass.connect(compressor);
         compressor.connect(context.destination);
