@@ -20,7 +20,7 @@ body {
 
 h1 {
     font-weight: 100;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 h1 span {
@@ -35,9 +35,15 @@ h1 span {
   border-bottom: 1px solid #ff6969;
   border-top: 2px solid #ff6969;
   display: flex;
-  padding: 50px 10px 20px;
+  flex-wrap: wrap;
+  padding: 0 10px 20px;
   justify-content: space-around;
   margin-bottom: 3em;
+}
+
+.synth-controls > div {
+  margin-top: 40px;
+  width: 140px;
 }
 
 .waveform {
@@ -45,7 +51,7 @@ h1 span {
 }
 
 .waveform button {
-    width: 100%;
+    width: 86px;
 }
 
 .waveform .display {
@@ -165,7 +171,8 @@ p {
   .filters {
     margin-bottom: 40px;
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   
   output {
