@@ -23,7 +23,7 @@ window.onload = function() {
         document.querySelector('.start').classList.remove('active');
         this.classList.add('active');
         gainNode.gain.setValueAtTime(0, context.currentTime)
-        context.close();
+        setTimeout(()=> context.close(), 200);
     });
 
     function createNoise() {
@@ -83,9 +83,9 @@ window.onload = function() {
             var v = dataArray[i] / 128.0;
             var y = v * canvas.height / 2;
             if (i === 0) {
-            canvasCtx.moveTo(x, y);
+                canvasCtx.moveTo(x, y);
             } else {
-            canvasCtx.lineTo(x, y);
+                canvasCtx.lineTo(x, y);
             }
             x += sliceWidth;
         }
